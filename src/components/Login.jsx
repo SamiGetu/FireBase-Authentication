@@ -14,7 +14,8 @@ import {
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State for storing login errors
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
       setError("Failed to log in. Check your credentials or sign up.");
+      setIsLoading(true);
     }
   };
 
@@ -31,6 +33,7 @@ const Login = () => {
     } catch (err) {
       setError("Failed to sign in with Google.");
     }
+    setIsLoading(true);
   };
 
   const handlePasswordReset = async () => {
@@ -134,7 +137,7 @@ const Login = () => {
                     type="submit"
                     className="mt-10 px-10 p-3 text-sm font-bold text-white bg-green-500 rounded-lg hover:bg-green-600"
                   >
-                    Log In
+                    {isLoading ? "Loging...." : "Login"}
                   </button>
                 </div>
               </div>

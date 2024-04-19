@@ -18,22 +18,27 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const signIn = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
       setError("Failed to log in. Check your credentials or sign up.");
-      setIsLoading(true);
     }
+    setIsLoading(false);
+    alert("LogIn successfull");
   };
 
   const signInWithGoogle = async () => {
+    setIsLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
     } catch (err) {
       setError("Failed to sign in with Google.");
     }
-    setIsLoading(true);
+
+    setIsLoading(false);
+    alert("LogIn successfull");
   };
 
   const handlePasswordReset = async () => {
@@ -76,7 +81,7 @@ const Login = () => {
               ></path>
             </svg>
           </div>
-          <div className="p-8 bg-white shadow-2xl shadow-gray-500/70  rounded-lg lg:w-[30%]">
+          <div className="p-8 bg-white shadow-2xl shadow-gray-500/70  rounded-lg lg:h-[70vh] h-full lg:w-[30%]">
             <form className="space-y-6" onSubmit={signIn}>
               <h2 className="text-4xl text-green-800 font-bold text-center pb-10">
                 Login
